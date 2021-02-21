@@ -29,5 +29,29 @@ other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish, 
 garpike and stingray are also present.'''
 ]
+oddelovac = 50*'-'
+#1. vstup uzivatele
+username = input("Zadej uzivatelske jmeno: ")
+password = input("Zadej heslo: ")
+print(oddelovac)
+# 2. overeni vstupu
+# 3. Vytiskni pozdrav a pokracuj v aplikaci
+# vymyslet overeni typu dat 
+databaze_uzivatelu = {'bob' : '123','ann':'pass123','mike':'password123','liz':'pass123'}
+for jmeno, heslo in databaze_uzivatelu.items():    
+    if username != jmeno or password != heslo:
+        continue
+        print(f'Jmeno: {username} neni v dabazi nebo jsi zadal spatne heslo. Program bude ukoncen.')
+    else:
+        print(f"Vitej v aplikaci, {username}\nMas k dispozici {len(TEXTS)} texty k analyze.")
+        print(oddelovac)
 
-#vstup uzivatele
+# 4. Vyber textu a overeni
+vyber_textu = input(f"Vyber cislo mezi 1 a {len(TEXTS)}: ")
+if vyber_textu.isalpha() or int(vyber_textu) > len(TEXTS):
+    print(f"Musis vybrat cislo v danem rozsahu! Program se ukonci.")
+else:
+  vyber_textu = int(vyber_textu) - 1
+  text = TEXTS[vyber_textu].split()
+  for slovo in text:
+    ocistene_slovo = slovo.strip('.,!?()')

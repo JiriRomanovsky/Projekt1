@@ -31,27 +31,56 @@ garpike and stingray are also present.'''
 ]
 oddelovac = 50*'-'
 #1. vstup uzivatele
-username = input("Zadej uzivatelske jmeno: ")
-password = input("Zadej heslo: ")
+username = input("Username: ")
+password = input("Password: ")
 print(oddelovac)
 # 2. overeni vstupu
 # 3. Vytiskni pozdrav a pokracuj v aplikaci
-# vymyslet overeni typu dat 
 databaze_uzivatelu = {'bob' : '123','ann':'pass123','mike':'password123','liz':'pass123'}
-for jmeno, heslo in databaze_uzivatelu.items():    
-    if username != jmeno or password != heslo:
-        continue
-        print(f'Jmeno: {username} neni v dabazi nebo jsi zadal spatne heslo. Program bude ukoncen.')
-    else:
-        print(f"Vitej v aplikaci, {username}\nMas k dispozici {len(TEXTS)} texty k analyze.")
-        print(oddelovac)
+if username not in databaze_uzivatelu or password != str(databaze_uzivatelu[username]):
+     print(f'Name {username} is not in the database or the password is incorrect. Program will be exited.')
+     exit()
+else:
+    print(f"Welcome to the app, {username}\nWe have {len(TEXTS)} texts to be analyzed.")
+    print(oddelovac)
 
 # 4. Vyber textu a overeni
-vyber_textu = input(f"Vyber cislo mezi 1 a {len(TEXTS)}: ")
-if vyber_textu.isalpha() or int(vyber_textu) > len(TEXTS):
-    print(f"Musis vybrat cislo v danem rozsahu! Program se ukonci.")
+vyber_textu = input(f"Enter a number btw. 1 and {len(TEXTS)} to select: ")
+print(oddelovac)
+if vyber_textu == '' or vyber_textu.isalpha() or int(vyber_textu) > len(TEXTS) or int(vyber_textu) == 0 :
+    print(f"You have to select a number within a range! Program will be exited.")
+    exit()
 else:
-  vyber_textu = int(vyber_textu) - 1
-  text = TEXTS[vyber_textu].split()
-  for slovo in text:
-    ocistene_slovo = slovo.strip('.,!?()')
+  vyber_textu = TEXTS[int(vyber_textu) - 1]
+  ocistena_slova = []
+  for slovo in vyber_textu.split(" "):
+    ocistena_slova.append(slovo.strip(".,!?)(\n"))
+# Priprava promenych
+  pocet_slov = len(ocistena_slova)
+  pocet_slov_titlecase = 0
+  pocet_slov_uppercase = 0
+  pocet_slov_lowercase = 0
+  pocet_slov_numeric = 0
+  soucet_cisel = []
+# 5. Vypocet statistik
+  for slovo in ocistena_slova:
+    if slovo.istitle():
+      pocet_slov_titlecase += 1 
+    elif slovo.isupper():
+      pocet_slov_uppercase += 1
+    elif slovo.islower():
+      pocet_slov_lowercase += 1
+    elif slovo.isnumeric():
+      pocet_slov_numeric += 1
+      for cislo in slovo:
+        soucet_cisel.append(int(cislo))
+
+# Vytisknuti statistik    
+print(f"There are {pocet_slov} words in the selected text.")
+print(f"There are {pocet_slov_titlecase} titlecase words.")
+print(f"There are {pocet_slov_uppercase} uppercase words.")
+print(f"There are {pocet_slov_lowercase} lowercase words.")
+print(f"There are {pocet_slov_numeric} numeric strings.")
+print(f"The sum of all the numbers {sum(soucet_cisel)}")
+print(oddelovac)
+# 6. Graficke znazorneni

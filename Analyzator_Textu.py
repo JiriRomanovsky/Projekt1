@@ -52,9 +52,9 @@ if vyber_textu == '' or vyber_textu.isalpha() or int(vyber_textu) > len(TEXTS) o
     exit()
 else:
   vyber_textu = TEXTS[int(vyber_textu) - 1]
-  ocistena_slova = []
-  for slovo in vyber_textu.split(" "):
-    ocistena_slova.append(slovo.strip(".,!?)(\n"))
+  ocistena_slova = [slovo.strip(".,!?)(\n") for slovo in vyber_textu.split(' ')]
+#   for slovo in vyber_textu.split(" "):
+#     ocistena_slova.append(slovo.strip(".,!?)(\n"))
 # Priprava promenych
   pocet_slov = len(ocistena_slova)
   pocet_slov_titlecase = 0
@@ -81,6 +81,14 @@ print(f"There are {pocet_slov_titlecase} titlecase words.")
 print(f"There are {pocet_slov_uppercase} uppercase words.")
 print(f"There are {pocet_slov_lowercase} lowercase words.")
 print(f"There are {pocet_slov_numeric} numeric strings.")
-print(f"The sum of all the numbers {sum(soucet_cisel)}")
+print(f"The sum of all the numbers {sum(soucet_cisel)}.")
 print(oddelovac)
+
 # 6. Graficke znazorneni
+
+print("LEN| OCCURENCIES |NR.")
+databaze_slov = {}
+for i, slovo in enumerate(ocistena_slova):
+    databaze_slov.setdefault(slovo,0)
+
+print(databaze_slov)

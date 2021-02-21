@@ -1,3 +1,3 @@
 {
-    "python.pythonPath": ".analyzator_textu/bin/python3"
+    "python.pythonPath": ".analyzator_textu\\Scripts\\python.exe"
 }

@@ -8,7 +8,7 @@ some 1000 feet above Twin Creek Valley
 to an elevation of more than 7500 feet 
 above sea level. The butte is located just 
 north of US 30N and the Union Pacific Railroad, 
-which traverse the valley. ''',
+which traverse the valley.''',
 
 '''At the base of Fossil Butte are the bright 
 red, purple, yellow and gray beds of the Wasatch 
@@ -87,8 +87,10 @@ print(oddelovac)
 # 6. Graficke znazorneni
 
 print("LEN| OCCURENCIES |NR.")
-databaze_slov = {}
-for i, slovo in enumerate(ocistena_slova):
-    databaze_slov.setdefault(slovo,0)
-
-print(databaze_slov)
+my_list = []
+for i in range(1,len(max(ocistena_slova,key=len))+1):
+  for slovo in ocistena_slova:
+    if len(slovo) == i:
+      my_list.append(slovo)
+  print(f"{i}|  {len(my_list) * '*'}| {len(my_list)}")
+  my_list.clear()
